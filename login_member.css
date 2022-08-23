@@ -1,17 +1,16 @@
 *{margin:0; padding  :0}
 
 body{
-  background:url('img_f/img_2.jpg');
-  size: cover;
-  padding-top: 10vh;
+  background:url('images/img_2.jpg');
+  padding-top: 15vh; 
   background-repeat: no-repeat;
-  background-size: 1536px 740px ;
+  background-size: 1710px 800px ; 
 }
 .loginbox{
   width: 250px;
   height: auto;
   padding: 30px 50px;
-  background-image: url('img_f/img_5.jpg');
+  background-image: url('images/img_5.jpg');
   border-radius: 10px;
   box-shadow: 10px;
   margin:auto ;
@@ -58,7 +57,7 @@ body{
   color: #fff;
 }
 
-.loginbox input[type="submit"]{
+.loginbox input[type="button"]{
   border: none;
   outline: none;
   height: 40px;
@@ -67,7 +66,7 @@ body{
   color: rgb(0, 0, 0);
 }
 
-.loginbox input[type="submit"]:hover{
+.loginbox input[type="button"]:hover{
   cursor: pointer;
   background: red;
   color:rgb(255, 255, 255);

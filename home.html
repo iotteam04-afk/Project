@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link href="home.css" rel="stylesheet" type="text/css">
+  <link href="carousel.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+  <header id="header">
+    <!-- <div class="container"> -->
+    <nav class="topnav">
+      <ul>
+        <li> <a href="home.html">Home</a> </li>
+      </ul>
+      <ul class="name">
+        <li> <a href="instruments" id="best-sellers">Instruments</a> </li>
+        <li> <a href="login_member.html" target="_blank">Member Login</a> </li>
+        <li> <a href="contact.html" target="_blank">Contact</a> </li>
+        <li> <a href="login_a.html" class="slpit" target="_blank">Admin Login</a> </li>
+      </ul>
+    </nav>
+
+    <!-- <div> -->
+  </header>
+
+  <br>
+
+  <div>
+  </div>
+
+  </head>
+
+
+
+  <div class="slideshow-container">
+
+    <div class="mySlides fade">
+      <div style="color:rgb(255, 248, 248); font-size: 70px;" class="text">PLAY WITH SOUND</div>
+      <img class="i" src="images/img_1.jpg" style="width:100%">
+    </div>
+
+    <div class="mySlides fade">
+      <div style="color:rgb(254, 0, 0); font-size: 70px;" class="text">LEARN THE SOUND</div>
+      <img class="i" src="images/img_7.jpg" style="width:100%">
+    </div>
+
+    <div class="mySlides fade">
+      <div style="color:rgb(0, 0, 0); font-size: 70px;" class="text">TUNE YOUR MUSIC </div>
+      <img class="i" src="images/img_8.jpg" style="width:100%;object-fit:cover"  >
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+
+  </div>
+  <br>
+
+  <div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+  </div>
+
+  <script src="slider_script.js">
+  
+  </script>
+
+  <div>
+    <h3 id="welcome">WELCOME TO sHeights</h3>
+    <h2>
+      <marquee> <i>GLADE TO SEE YOU HERE!! </i> </marquee>
+    </h2>
+    <h4>Find YOUR Sound for Music. </h4>
+  </div>
+
+
+  <!-- general product container -->
+  <div class="product-container">
+    <h1 id="bestone"> BEST ONES </h1>
+    <div class="cart">
+
+
+
+      <div class="products">
+
+        <!-- product 1 -->
+
+        <div class="product">
+          <img src="instruments_img/guitar/guitar_1.jpg">
+          <div class="product-info">
+            <h3 class="product-name">Yamaha F280 Natural Acoustic Guitar Made in India
+            </h3>
+            <ul class="product-info" style="list-style-type:disc">
+              <li>Comfortable playability for beginners</li>
+              <li>High durability and stability proven by Yamaha's quality standard</li>
+              <li>38 inches long (96.5cm)</li>
+            </ul>
+            <h4 class="product-price">₹ 7,000</h4>
+            <!-- <h4 class="product-offer">50%</h4> -->
+            <p class="product-quantity">Qnt: <input value="1" name="">
+            <p class="product-remove">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+              <span class="remove">Cart</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- product 2 -->
+
+        <div class="product" style="float: right;">
+          <img src="instruments_img/violin/violin_1.jpg">
+          <div class="product-info">
+            <h3 class="product-name">Sergio Tordini </h3>
+            <ul class="product-info" style="list-style-type:disc">
+              <li>Rosin And Soft Case - STC 441</li>
+              <li>4/4 Full Size Acoustic Violin With Bow</li>
+              <li>Made in Yamaha Music India factory</li>
+            </ul>
+            <h4 class="product-price">₹ 10,800</h4>
+            <p class="product-quantity">Qnt: <input value="1" name="">
+            <p class="product-remove">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+              <span class="remove">Cart</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- product 3 -->
+
+        <div class="product">
+          <img src="instruments_img/violin/violin_3.jpg">
+          <div class="product-info">
+            <h3 class="product-name">Sergio Tordini </h3>
+            <ul class="product-info" style="list-style-type:disc">
+              <li>Rosin And Soft Case - STC 441</li>
+              <li>4/4 Full Size Acoustic Violin With Bow</li>
+              <li>Made in Yamaha Music India factory</li>
+            </ul>
+            <h4 class="product-price">₹ 11,500</h4>
+            <p class="product-quantity">Qnt: <input value="1" name="">
+            <p class="product-remove">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+              <span class="remove">Cart</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- product 4 -->
+
+        <div class="product">
+          <img src="instruments_img/violin/violin_3.jpg">
+          <div class="product-info">
+            <h3 class="product-name">Yamaha FX280 TBS </h3>
+            <ul class="product-info" style="list-style-type:disc">
+              <li>(Brown Sunburst) Electro Acoustic Guitar,perfect acoustic-electric Guitar for beginners.</li>
+              <li>4/4 Full Size Acoustic Violin With Bow</li>
+              <li>Made in Yamaha Music India factory</li>
+            </ul>
+            <h4 class="product-price">₹10,990 </h4>
+            <p class="product-quantity">Qnt: <input value="1" name="">
+            <p class="product-remove">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+              <span class="remove">Cart</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Member login Page </title>
+  <link href="login_member.css" rel="stylesheet" type="text/css">
+  <!-- <script type="login_m_val"> </script> -->
+  <!-- <script src="email.js"></script> -->
+
+</head>
+
+<body>
+  <div class="loginbox">
+    <h1>Member Login </h1><br><br>
+  <form action="login_p.php"  id="form_id" method="post" name="myform">
+    <p type="text_em">Email Id</p>
+    <input type="email" name="email" placeholder="Enter your Email" required id="email">
+    <p type="text_pa">Password</p>
+    <input type="password" name="password" placeholder="Password" required id="password">
+    <input type="button" value="Login" id="submit" onclick="validate()"/><br>
+    <a href="#">Create a new account</a>
+  </form>
+  </div>
+</body>
+</html>
