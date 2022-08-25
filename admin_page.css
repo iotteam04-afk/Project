@@ -1,0 +1,108 @@
+*{margin:0; padding  :0}
+
+body{
+  background:url('');
+  padding-top: 15vh; 
+  background-repeat: no-repeat;
+  background-size: 1710px 800px ; 
+  background-color: rgb(35, 35, 35);
+}
+.loginbox{
+  width: 252px;
+  height: auto;
+  padding: 28px 53px;
+  background-color: antiquewhite;
+  /* background-image: url('images/sHeights-2.1.jpg'); */
+  border-radius: 25px;
+  box-shadow: 10px;
+  margin:auto ;
+  opacity:0.8;
+  background-repeat: no-repeat;
+  background-size: 359px 511px;
+}
+
+.loginbox input{
+  list-style-type: none;
+  text-align: center;
+  width: 250px;
+  height: 25px;
+  text-align: center;
+  padding: 4px 0px;
+}
+
+.p1{
+  text-shadow: 2px 2px #1c15ce;
+  font-size: 50px; 
+  color: rgb(255, 255, 255); 
+  text-align: center; 
+  opacity: 1;
+  margin-top: -60px;
+  margin-bottom: 15px;
+}
+
+.loginbox p{
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.loginbox input{
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.loginbox input[type="email"],input[type="password"]{
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  background: transparent;
+  outline: none;
+  height: 40px;
+  font-size: 18px;
+}
+.loginbox input[type="email"],input[type="password"]{
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  background: transparent;
+  outline: none;
+  height: 40px;
+  font-size: 18px;
+  color: rgb(0, 0, 0);
+}
+
+.loginbox input[type="button"]{
+  border: none;
+  outline: none;
+  height: 40px;
+  font-size: 22px;
+  border-radius: 20px;
+  color: rgb(5, 5, 5);
+  background-color: gray;
+}
+
+.loginbox input[type="button"]:hover{
+  cursor: pointer;
+  background: red;
+  color:rgb(0, 0, 0);
+}
+
+.loginbox a{
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 26px;
+  color: rgb(0, 0, 0);
+}
+
+.loginbox a:hover{
+  color: red;
+}
+
+h1{
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+.loginbox p[type="text_em"], p[type="text_pa"]{
+  color:rgb(0, 0, 0);
+  font-size: 28px;
+  text-align: center;
+}
