@@ -28,6 +28,7 @@ body{
   padding: 4px 0px;
 }
 .loginbox p{
+  color: rgb(255, 254, 254);
   margin: 0;
   padding: 0;
   font-weight: bold;
@@ -39,17 +40,21 @@ body{
   margin-bottom: 20px;
 }
 
-.loginbox input[type="email"],input[type="password"]{
+
+.loginbox input[type="email"], input[type="password"],input[type="text"] 
+ {
   border: none;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid rgb(239, 23, 23);
   background: transparent;
   outline: none;
   height: 40px;
   font-size: 18px;
-}
-.loginbox input[type="email"],input[type="password"]{
+  color: #fff;
+ }
+.userName{
+  border: 2px solid red;
   border: none;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid rgb(239, 23, 23);
   background: transparent;
   outline: none;
   height: 40px;
@@ -87,6 +92,6 @@ h1{
   text-align: center;
   color: #fff;
 }
-.loginbox p[type="text_em"], p[type="text_pa"]{
+/* .loginbox p[type="text_em"], p[type="text_pa"]{
   color:white;
-}
+} */
