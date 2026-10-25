@@ -77,7 +77,7 @@ body{
   font-size: 22px;
   border-radius: 20px;
   color: rgb(5, 5, 5);
-  background-color: gray;
+  background-color: rgb(255, 0, 0);
 }
 
 .loginbox input[type="button"]:hover{

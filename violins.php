@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="css/violin.css" rel="stylesheet" type="text/css">
+  <title>Violins</title>
+</head>
+
+<body>
+  <!-- .card*3 -->
+
+  <!-- guitar r1 -->
+  <div class="row">
+
+    <div class="card" id="g11">
+       <img src="./instruments_img/violin/Salablez.jpg" alt="">
+      <div class="card-content">
+        <h2 class="i_name">Salablez Behala</h2>
+        <p class="i_content">Ebony peg and Pine Wood Fingerboard with natural Glossy finish.</p>
+        <a href="#" class="button">cart</a>
+      </div>
+    </div>
+
+    <div class="card" id="g12">
+      <img src="./instruments_img/violin/Vivaldi.jpg" alt="">
+      <div class="card-content">
+        <h2 class="i_name">Vivaldi 4/4 Violin</h2>
+        <p class="i_content">Mahagony Back & Sides, Mahagony Finger Board, Ebony Wood Quality.</p>
+        <a href="#" class="button">cart</a>
+      </div>
+    </div>
+
+    <div class="card" id="g13">
+      <img src="./instruments_img/violin/V1001.jpg" alt="">
+      <div class="card-content">
+        <h2 class="i_name">Kadence V001b 4/4</h2>
+        <p class="i_content">Size Is 4/4. Bow Hair Material Is White Horse Hair.</p>
+        <a href="#" class="button">cart</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- guitar r2 -->
+
+  <div class="row">
+
+    <div class="card" id="g21">
+      <img src="./instruments_img/violin/VaultEnorm.jpg" alt="">
+      <div class="card-content">
+        <h2 class="i_name">Vault Enorm Solid Spruce</h2>
+        <p class="i_content">/4 Violin with Bow, Rosin & Case.Full-size violin with a solid spruce top.</p>
+        <a href="#" class="button">cart</a>
+      </div>
+    </div>
+<!-- NOT RIGHT   -->
+    <div class="card" id="g22">
+      <img src="./instruments_img/violin/Oldgerman.jpg" alt="">
+      <div class="card-content">
+        <h2 class="i_name">Kadence</h2>
+        <p class="i_content">Perfect acoustic-electric Guitar for beginners.</p>
+        <a href="#" class="button">cart</a>
+      </div>
+    </div>
+
+    <div class="card" id="g23">
+      <img src="instruments_img/violin/Aswadh_copy.jpg" alt="" style="width: 358px;height:355px">
+      <div class="card-content">
+        <h2 class="i_name">Aswadh Acoustic Violin</h2>
+        <p class="i_content">4/4 full size natural acoustic violin fiddle with case, bow and rosin.</p>
+        <a href="#" class="button">cart</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- guitar r3 -->
+
+  <div class="row">
+
+    <div class="card" id="g1">
+      <img src="instruments_img/violin/AstonvillaAV-E310.jpg" alt="">
+      <div class="card-content">
+        <h2 class="i_name">AstonvillaAV-E310</h2>
+        <p class="i_content">Matte Electro-Acoustic EQ Violin with Case Bow Rosin Extra Strings.</p>
+        <a href="#" class="button">cart</a>
+      </div>
+    </div>
+
+    <div class="card" id="g2" style="width: 100%;">
+      <img src="instruments_img/violin/YinfenteelectricViolin.jpg" alt="" >
+      <div class="card-content" >
+        <h2 class="i_name">Yinfente Electric Acoustic</h2>
+        <p class="i_content">Professional & Sweet Sound natural spruce wood violin top.</p>
+        <a href="#" class="button">cart</a>
+      </div>
+    </div>
+
+    <div class="card" id="g3">
+      <img src="instruments_img/violin/Cecilio44CVNAE-330SR.jpg" alt="" >
+      <div class="card-content" >
+        <h2 class="i_name">Cecilio 44 CVNAE-330SR</h2>
+        <p class="i_content">Hand-carved solid spruce top, solid maple back,with volume and tone.</p>
+        <a href="#" class="button">cart</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

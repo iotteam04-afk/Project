@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Member login Page </title>
+  <link href="css/login.css" rel="stylesheet" type="text/css">
+
+
+
+</head>
+
+<body>
+  <div class="loginbox">
+    <h1>Member Registration </h1><br><br>
+    <form id="form_id" method="post" name="myform" action="registrtion.php">
+
+      <p type="text_em" style="color: white;font-size: 24px;">UserName</p>
+
+      <input type="text" name="username" class="userName" placeholder="Enter your UserName" required>
+
+      <p type="text_em" style="color: white;font-size: 24px;">Email Id</p>
+
+      <input type="email" name="email" placeholder="Enter your Email" required id="email">
+
+      <p type="text_pa" style="color: white;font-size: 24px;">Password</p>
+
+      <input type="password" name="password" placeholder="Password" required id="password">
+
+      <input type="submit" value="Login" id="submit" name="enter" onclick="validate()" /><br>
+
+      <a href="member_login.php" style="font-size: 20px;">Go to login</a>
+    </form>
+  </div>
+
+</body>
+
+
+</html>
