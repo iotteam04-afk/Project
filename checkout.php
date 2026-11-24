@@ -77,16 +77,13 @@ if(isset($_POST['order_btn'])){
    <title>checkout</title>
 
    <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
+   <link rel="stylesheet" href="dashboard/vendor/fontawesome-free/css/all.min.css">
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="style-of.css">
-   <link href="style.css" rel="stylesheet">
+   <link rel="stylesheet" href="css/checkout.css">
 
 </head>
 <body>
 
-<!-- <?// include 'header.php'; ?> -->
 
 <div class="container">
 
@@ -150,19 +147,5 @@ if(isset($_POST['order_btn'])){
 
 </div>
 </div>
-<script>
-        function clickme(smallImg) {
-
-            var fullImg = document.getElementById("imagebox");
-            fullImg.src = smallImg.src;
-
-        }
-
-    </script>
-    
-
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
-   
 </body>
 </html>

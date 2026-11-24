@@ -29,7 +29,6 @@ if (isset($_SESSION['email'])) {
 <body>
 
   <header id="header">
-    <!-- <div class="container"> -->
     <nav class="topnav">
       <ul>
         <li> <a href="home.php">Home</a> </li>
@@ -48,7 +47,6 @@ if (isset($_SESSION['email'])) {
           </div>
         </li>
         <li> <a href="member_login.php">Member Login</a> </li>
-        <li> <a href="admin_page.php" class="slpit">Admin Login</a> </li>
         <li> <a href="cart.php">Cart</a> </li>
       </ul>
     </nav>
@@ -120,10 +118,7 @@ if (isset($_SESSION['email'])) {
             <li>High durability and stability proven by Yamaha's quality standard</li>
             <li>38 inches long (96.5cm)</li>
           </ul>
-          <h4 class="product-price">₹ 7,000</h4>
-          <!-- <h4 class="product-offer">50%</h4> -->
-          <!-- <p class="product-quantity">Qnt: <input value="1" name=""> -->
-          
+          <h4 class="product-price">₹ 7,000</h4>          
         </div>
       </div>
 <?php }}?>
@@ -139,8 +134,6 @@ if (isset($_SESSION['email'])) {
             <li>Made in Yamaha Music India factory</li>
           </ul>
           <h4 class="product-price">₹ 10,800</h4>
-          <!-- <p class="product-quantity">Qnt: <input value="1" name=""> -->
-          
         </div>
       </div>
 
@@ -156,8 +149,6 @@ if (isset($_SESSION['email'])) {
             <li>Basswood top with maple back & sides, tuned by professional Strings.</li>
           </ul>
           <h4 class="product-price">₹ 6,600</h4>
-          <!-- <p class="product-quantity">Qnt: <input value="1" name=""> -->
-          
         </div>
       </div>
 
@@ -173,13 +164,10 @@ if (isset($_SESSION['email'])) {
             <li>Made in Yamaha Music India factory</li>
           </ul>
           <h4 class="product-price">₹10,990 </h4>
-          <!-- <p class="product-quantity">Qnt: <input value="1" name=""> -->
-          
         </div>
       </div>
     </div>
   </div>
-  <!-- </div> -->
 
   <br>
 

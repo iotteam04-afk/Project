@@ -30,7 +30,7 @@ include 'dashboard/dbconfig.php';
       header('location:home.php');
     } else {
       $_SESSION['status'] = 'something is wrong';
-      header('location:login_member.php');
+      header('location:member_login.php');
     }
   }
 

@@ -26,10 +26,10 @@ include 'wishlist_cart.php';
    <title>category</title>
    
    <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+   <link rel="stylesheet" href="dashboard/vendor/fontawesome-free/css/all.min.css">
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="cat_style/style.css">
+   <link rel="stylesheet" href="css/shop.css">
    <link rel="stylesheet" href="css/home.css">
 
 </head>
@@ -56,8 +56,6 @@ include 'wishlist_cart.php';
       <input type="hidden" name="name" value="<?= $fetch_products['name']; ?>">
       <input type="hidden" name="price" value="<?= $fetch_products['price']; ?>">
       <input type="hidden" name="image" value="<?= $fetch_products['image']; ?>">
-      <!-- <button class="fas fa-heart" type="submit" name="add_to_wishlist"></button>
-      <a href="quick_view.php?pid=<?//= $fetch_products['id']; ?>" class="fas fa-eye"></a> -->
       <img src="dashboard/instruments_img/<?= $fetch_products['image']; ?>" alt="">
       <div class="name"><?= $fetch_products['name']; ?></div>
       <div class="flex">
@@ -80,22 +78,5 @@ include 'wishlist_cart.php';
    </div>
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<?php //include 'components/footer.php'; ?>
-
-<script src="js/script.js"></script>
-
 </body>
 </html>

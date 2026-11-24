@@ -21,69 +21,16 @@ if (isset($_SESSION['email'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart Design Page For beginners</title>
-    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-    <link rel="stylesheet" href="cart.css">
+    <title>Cart</title>
+    <link rel="stylesheet" href="css/cart.css">
     <link rel="stylesheet" href="css/home.css">
 
-    <script src="./jquery-3.5.1.js"></script>
-    <script>
-        $(document).ready(function() {
-            $(".size_select").click(function() {
-                $(".slider").addClass("active");
-                $(".select_size").show();
-                $(".select_quantity").hide();
-            })
-
-            $(".qty_select").click(function() {
-                $(".slider").addClass("active");
-                $(".select_size").hide();
-                $(".select_quantity").show();
-            })
-
-            $(".close, .bg_shadow, .button").click(function() {
-                $(".slider").removeClass("active");
-            })
-
-            $(".select_size .body ul li").click(function() {
-                $(".select_size .body ul li").removeClass("active");
-                $(this).addClass("active");
-                $(".size_select span").text($(this).text());
-                $(".slider").removeClass("active");
-            })
-
-            $(".select_quantity .body ul li").click(function() {
-                $(".select_quantity .body ul li").removeClass("active");
-                $(this).addClass("active");
-                $(".qty_select span").text($(this).text());
-                $(".slider").removeClass("active");
-            })
-
-        });
-    </script>
 </head>
 
 <body>
 
 <?php include 'header/header.php';?>
 
-    <!-- <div class="cart_navigation">
-        <div class="cart_logo">
-            <a href="#"><i class="fas fa-shopping-cart"></i></a>
-        </div>
-        <div class="middle_content">
-            <div class="bag">BAG ----</div>
-            
-            <div class="address">ADDRESS ----</div>
-            
-            <div class="payment">PAYMENT</div>
-            
-        </div>
-        <div class="secure">
-            <i class="fas fa-lock"></i>
-            <p>100% secure</p>
-        </div>
-    </div> -->
     <div class="wrapper">
 
         <div class="wrapper_content">
@@ -92,7 +39,6 @@ if (isset($_SESSION['email'])) {
                     MY SHOPPING CART :
                 </div>
                 <div class="amount">
-                    <!-- <b>( 2 ) ITEMS</b>  -->
                 </div>
 
             </div>
@@ -189,13 +135,6 @@ if (isset($_SESSION['email'])) {
                     </div>
                 </div>
 
-                <?php
-
-                        $select_product = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
-                        $select_product->execute([$user_id]);
-                        if ($select_product->rowCount() > 0) {
-                            while ($fetch_product = $select_product->fetch(PDO::FETCH_ASSOC)) {}}
-                        ?>
                 <div class="checkout">
                     <a href="checkout.php" role="button" class="checkout_btn">Place Order</a>
                 </div>

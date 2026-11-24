@@ -1,6 +1,5 @@
 
 <header id="header">
-    <!-- <div class="container"> -->
     <nav class="topnav">
       <ul>
         <li> <a href="home.php">Home</a> </li>
@@ -20,7 +19,6 @@
         </li>
         <li> <a href="products.php">Shop Now</a> </li>
         <li> <a href="member_login.php">Member Login</a> </li>
-        <li> <a href="admin_page.php" class="slpit">Admin Login</a> </li>
         <li> <a href="cart.php">Cart</a> </li>
       </ul>
     </nav>

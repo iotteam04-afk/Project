@@ -80,16 +80,13 @@ if (isset($_GET['delete'])) {
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>products</title>
 
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+   <link rel="stylesheet" href="vendor/fontawesome-free/css/all.min.css">
 
    <link rel="stylesheet" href="./admin_style.css">
 
 </head>
 
 <body>
-
-   <!-- <? // include '../components/admin_header.php'; 
-         ?> -->
 
    <section class="add-products">
 
@@ -148,12 +145,8 @@ if (isset($_GET['delete'])) {
                   <div class="price">Category: <?= $fetch_products['category']; ?></div>
                   <div class="price">Rs. <span><?= $fetch_products['price']; ?></span>/-</div>
                   <div class="details"><span><?= $fetch_products['details']; ?></span></div>
-                  <a href="update_products.php?update=<?=$fetch_products['id']; ?>" class="btn">Update Products</a>
+                  <a href="update_product.php?update=<?=$fetch_products['id']; ?>" class="btn">Update Products</a>
                   <a href="add_products.php?delete=<?=$fetch_products['id']; ?>" class="btn">Delete</a>
-                  <!-- <div class="flex-btn">
-         <a href="update_product.php?update=<?= $fetch_products['id']; ?>" class="option-btn">update</a>
-         <a href="products.php?delete=<?= $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('delete this product?');">delete</a>
-      </div> -->
                </div>
          <?php
             }
@@ -165,7 +158,6 @@ if (isset($_GET['delete'])) {
       </div>
 
    </section>
-   <!-- <script src="../js/admin_script.js"></script> -->
 
 </body>
 

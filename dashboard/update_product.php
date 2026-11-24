@@ -7,7 +7,7 @@ session_start();
 $admin_id = $_SESSION['admin_id'];
 
 if(!isset($admin_id)){
-   header('location:admin_login.php');
+   header('location:login.php');
 }
 
 if(isset($_POST['update'])){
@@ -43,9 +43,8 @@ if(isset($_POST['update'])){
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>update product</title>
 
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
-   <link rel="stylesheet" href="../css/admin_style.css">
+   <link rel="stylesheet" href="vendor/fontawesome-free/css/all.min.css">
+   <link rel="stylesheet" href="admin_style.css">
 
 </head>
 <body>
@@ -65,11 +64,11 @@ if(isset($_POST['update'])){
    ?>
    <form action="" method="post" enctype="multipart/form-data">
       <input type="hidden" name="pid" value="<?= $fetch_products['id']; ?>">
-      <input type="hidden" name="old_image_01" value="<?= $fetch_products['image_01']; ?>">
+      <input type="hidden" name="old_image_01" value="<?= $fetch_products['image']; ?>">
       
       <div class="image-container">
          <div class="main-image">
-            <img src="uploaded_img/<?= $fetch_products['image_01']; ?>" alt="">
+            <img src="instruments_img/<?= $fetch_products['image']; ?>" alt="">
          </div>
          
       </div>
@@ -102,19 +101,5 @@ if(isset($_POST['update'])){
    ?>
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="../js/admin_script.js"></script>
-   
 </body>
 </html>
