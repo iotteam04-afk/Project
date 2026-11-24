@@ -1,14 +1,6 @@
 <?php
 session_start();
-include('database/dbconfig.php');
-if($dbconfig)
-{
-    // echo "Database Connected";
-}
-else
-{
-    header("Location: database/dbconfig.php");
-}
+require_once __DIR__ . '/../config.php';
 
 if(!$_SESSION['username'])
 {

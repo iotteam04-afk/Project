@@ -1,7 +1,7 @@
   <?php
 
 
-include 'dashboard/dbconfig.php';
+require_once __DIR__ . '/config.php';
 
   session_start();
 
@@ -14,9 +14,6 @@ include 'dashboard/dbconfig.php';
      $user_id = '';
   };
 
-
-  //$connection = mysqli_connect("localhost", "root", "", "sheights");
-  // mysqli_select_db($connection,'sheights');
 
   if (isset($_POST['enter'])) {
     $email = $_POST['email'];

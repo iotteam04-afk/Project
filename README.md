@@ -25,27 +25,32 @@ On Windows, XAMPP is a straightforward way to install Apache, PHP, and MariaDB t
 3. Create the database:
    - Open `http://localhost/phpmyadmin`.
    - Create a database named `sheights`.
-   - Select that database, choose **Import**, select this project's `sheights.sql` file, then import it.
-4. Check the database connection settings in both `dashboard\config.php` and `dashboard\dbconfig.php`. They currently expect MySQL on `localhost`, database `sheights`, username `root`, and an empty password. Update both files if your local MySQL credentials differ.
-5. Open `http://localhost/Project/home.php` in your browser. If you used a different folder name under `htdocs`, replace `Project` in the URL with that folder name.
+   - Select that database, choose **Import**, select this project's `database\sheights.sql` file, then import it.
+4. Create the shop's database user: in phpMyAdmin, open the **SQL** tab (at server level, not inside a database), paste the contents of `database\setup_db.sql`, and run it. This creates the user `shop`, which may only read and change rows in `sheights`.
+5. Check the connection settings in `config.php` (project root). By default the shop connects to `sheights` on `localhost` as user `shop` with password `shop_dev_pw`. If you change the password in `setup_db.sql`, change it in `config.php` too.
+6. Open `http://localhost/Project/home.php` in your browser. If you used a different folder name under `htdocs`, replace `Project` in the URL with that folder name.
 
 ## Other local setups
 
-You can use another PHP-capable web server and MySQL/MariaDB installation instead of XAMPP. Point the web server's document root at the project directory, create the `sheights` database, import `sheights.sql`, and update both connection files with your database host, name, username, and password. Ensure PHP has both MySQL extensions enabled.
+You can use another PHP-capable web server and MySQL/MariaDB installation instead of XAMPP. Point the web server's document root at the project directory, run `database/setup_db.sql` as the database root user, import `database/sheights.sql` into the `sheights` database, and adjust `config.php` if your host, user, or password differ. Ensure PHP has both MySQL extensions enabled.
+
+On a server, keep the `database/` folder outside the web root so the SQL files cannot be downloaded.
 
 ## Project map
 
+- `config.php` — database connection settings, used by every page
 - `home.php` — storefront homepage
-- `products.php`, `category.php`, `guitars.php`, `violins.php`, `percussion.php` — product browsing
-- `member_login.php`, `Register.php` — customer login and registration pages
-- `cart.php`, `checkout.php` — cart and checkout
-- `dashboard\` and `admin_page\` — admin-related pages and assets
-- `sheights.sql` — database schema and sample data
-- `instruments_img\`, `images\`, `css\` — product images, site images, and styles
+- `products.php`, `category.php` — product browsing
+- `member_login.php`, `Register.php`, `registrtion.php` — customer login and registration
+- `cart.php`, `wishlist_cart.php`, `checkout.php` — cart and checkout
+- `header\` — shared storefront header
+- `dashboard\` — admin panel (admins, members, products, orders)
+- `database\` — `sheights.sql` (schema and sample data) and `setup_db.sql` (database user)
+- `dashboard\instruments_img\`, `images\`, `css\` — product images, site images, and styles
 
 ## Notes
 
 - The site expects the database to be named exactly `sheights`.
 - Product image values are resolved from `dashboard\instruments_img\`; ensure referenced image files are present there.
-- The repository contains two admin-related directories and more than one database connection file. Keep their database settings in sync when changing credentials.
-- This project appears intended for local/demo use. Review authentication, input handling, and database security before deploying it to a public server.
+- The shop never loads anything from the internet (fonts and icons are served locally), so it also works on an isolated network.
+- This project is a deliberately vulnerable training target for the SUASecLab. Do not deploy it on a public server.

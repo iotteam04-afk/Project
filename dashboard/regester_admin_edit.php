@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once __DIR__ . '/../config.php';
 include('includes/header.php');
 include('includes/navbar.php');
 ?>
@@ -13,7 +14,6 @@ include('includes/navbar.php');
     <div class="card-body">
 
       <?php
-      $connection = mysqli_connect("localhost", "root", "", "sheights");
 
       if (isset($_POST['edit_btn'])) {
         $id = $_POST['edit_id'];

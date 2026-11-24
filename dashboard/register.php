@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once __DIR__ . '/../config.php';
 include('includes/header.php');
 include('includes/navbar.php');
 ?>
@@ -76,7 +77,6 @@ include('includes/navbar.php');
       <div class="table-responsive">
 
         <?php
-        $connection = mysqli_connect("localhost", "root", "", "sheights");
         $query = "SELECT * FROM admins";
         $query_run = mysqli_query($connection, $query);
         ?>

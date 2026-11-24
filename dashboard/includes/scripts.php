@@ -11,8 +11,6 @@
   <?php
 
 
-$connection = mysqli_connect("localhost","root","","sheights");
-
 if(isset($_POST['registerbtn']))
 {
     $username = $_POST['username'];

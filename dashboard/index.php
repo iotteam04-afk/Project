@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../config.php';
 include('includes/header.php');
 include('includes/navbar.php');
 ?>
@@ -21,10 +22,7 @@ include('includes/navbar.php');
               <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Register Admins</div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
                 
-                <?php
-                require'dbconfig.php';
- 
-                // $connection = mysqli_connect("localhost", "root", "", "sheights");
+                <?php              
 
                 $query = "SELECT id FROM admins ORDER BY id";
                 $query_run = mysqli_query($connection, $query);

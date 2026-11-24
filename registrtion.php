@@ -2,16 +2,7 @@
 session_start();
 header('location:member_login.php');
 
-$connection =mysqli_connect('localhost','root');
-
-if($connection){
-    echo"Data entered";
-  }
-  else{
-    echo"Data not entered";
-  }
-
-  mysqli_select_db($connection,'sheights');
+require_once __DIR__ . '/config.php';
   $name=$_POST['username'];
   $em=$_POST['email'];
   $pass=$_POST['password'];

@@ -3,7 +3,7 @@ session_start();
 include('security.php');
 
 
-$connection=mysqli_connect("localhost","root","","sheights");
+require_once __DIR__ . '/../config.php';
 
 if(isset($_POST['registerbtn']))
 {
