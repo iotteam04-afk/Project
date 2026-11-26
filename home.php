@@ -103,7 +103,7 @@ if (isset($_SESSION['user_id'])) {
 
       <!-- product 1 -->
 <?php
-      $select_products = $conn->prepare("SELECT * FROM `products` LIMIT 3");
+      $select_products = $conn->prepare("SELECT * FROM `products` LIMIT 4");
       $select_products->execute();
       if($select_products->rowCount() > 0){
       while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){
@@ -118,56 +118,14 @@ if (isset($_SESSION['user_id'])) {
             <li>High durability and stability proven by Yamaha's quality standard</li>
             <li>38 inches long (96.5cm)</li>
           </ul>
-          <h4 class="product-price">₹ 7,000</h4>          
+          <h4 class="product-price">₹ <?= $fetch_products['price']?></h4>          
         </div>
       </div>
 <?php }}?>
-      <!-- product 2 -->
-
-      <div class="product" style="float: right;">
-        <img src="instruments_img/violin/violin_1.jpg">
-        <div class="product-info">
-          <h3 class="product-name">Sergio Tordini </h3>
-          <ul class="product-info" style="list-style-type:disc">
-            <li>Rosin And Soft Case - STC 441</li>
-            <li>4/4 Full Size Acoustic Violin With Bow</li>
-            <li>Made in Yamaha Music India factory</li>
-          </ul>
-          <h4 class="product-price">₹ 10,800</h4>
+      
+      
         </div>
       </div>
-
-      <!-- product 3 -->
-
-      <div class="product">
-        <img src="instruments_img/violin/violin_5.jpg">
-        <div class="product-info">
-          <h3 class="product-name">Mike Music 4/4 Black Violin </h3>
-          <ul class="product-info" style="list-style-type:disc">
-            <li>Size 4/4 Mike Music Black varnish violin</li>
-            <li>Hard Case, Shoulder Rest, Bow, Rosin</li>
-            <li>Basswood top with maple back & sides, tuned by professional Strings.</li>
-          </ul>
-          <h4 class="product-price">₹ 6,600</h4>
-        </div>
-      </div>
-
-      <!-- product 4 -->
-
-      <div class="product">
-        <img src="instruments_img/guitar/guitar_2.jpg">
-        <div class="product-info">
-          <h3 class="product-name">Yamaha FX280 TBS </h3>
-          <ul class="product-info" style="list-style-type:disc">
-            <li>(Brown Sunburst) Electro Acoustic Guitar,perfect acoustic-electric Guitar for beginners.</li>
-            <li>4/4 Full Size Acoustic Violin With Bow</li>
-            <li>Made in Yamaha Music India factory</li>
-          </ul>
-          <h4 class="product-price">₹10,990 </h4>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <br>
 
