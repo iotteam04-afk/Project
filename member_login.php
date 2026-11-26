@@ -1,34 +1,38 @@
-  <?php
-
+  <?php 
+  session_start();
 
 require_once __DIR__ . '/config.php';
 
-  session_start();
+  
 
 
   
 
-  if(isset($_SESSION['email'])){
-     $user_id = $_SESSION['email'];
+  if(isset($_SESSION['user_id'])){
+     $user_id = $_SESSION['user_id'];
   }else{
      $user_id = '';
-  };
+  }
 
-
+  
   if (isset($_POST['enter'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-    $query = "SELECT * FROM data WHERE email='$email' AND password='$password'";
-    $query_run = mysqli_query($connection, $query);
+    $stmt = $conn->prepare('SELECT id, username, password FROM data WHERE email = ?');
+    $stmt->execute([$email]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (mysqli_fetch_array($query_run)) {
-      $_SESSION['email'] = $email;
-      header('location:home.php');
-    } else {
-      $_SESSION['status'] = 'something is wrong';
-      header('location:member_login.php');
-    }
+    if ($row && password_verify($password, $row['password'])) {
+      session_regenerate_id(true);
+      $SESSION['user_id'] = $row[ 'id'];
+      $SESSION['username'] = $row[ 'username'];
+      header('Location: home.php');
+      exit;
+    } 
+    $_SESSION['status'] = 'Wrong email or password';
+    header('Location: member_login.php');
+    exit;
   }
 
 
@@ -52,6 +56,10 @@ require_once __DIR__ . '/config.php';
     <div class="loginbox">
 
       <h1>Member Login </h1><br><br>
+      <?php if (!empty($_SESSION['status'])): ?>
+        <p style="color: #ff8080: font-size: 18px;"><?= e($_SESSION['status']) ?></p>
+        <?php unset($_SESSION['status']); ?>
+      <?Php endif; ?>
 
       <form action="" method="POST">
 
