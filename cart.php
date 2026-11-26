@@ -12,8 +12,18 @@ if (!isset($_SESSION['user_id'])) {
 } 
 $user_id = $SESSION['user_id'];
     
-
-
+if (isset($_POST['update_qty'])){
+    $stmt = $conn->prepare("UPDATE cart SET quantity = ? WHERE id = ? AND user_id = ?");
+    $stmt->execute([(int)$_POST['qty'],(int)$_POST['cart_id'], $user_id]);
+    header('Location: cart.php');
+    exit;
+}
+if (isset($_POST['remove_item'])){
+    $stmt = $conn->prepare("DELETE FROM cart WHERE id = ? AND user_id = ?");
+    $stmt->execute([(int)$_POST['cart_id'], $user_id]);
+    header('Location: cart.php');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -49,8 +59,9 @@ $user_id = $SESSION['user_id'];
             $grand_total = 0;
             $select_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
             $select_cart->execute([$user_id]);
-            if ($select_cart->rowCount() > 0) {
-                while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
+            $items = $select_cart->fetchAll(PDO::FETCH_ASSOC);
+            if (count($items) > 0) {
+                foreach ($items as $fetch_cart) {
             ?>
 
                     <form action="" method="post">
@@ -82,7 +93,8 @@ $user_id = $SESSION['user_id'];
                                 </div>
                             </div>
                             <div class="product_btns">
-                                <!-- items to delete -->
+                                <button type = "submit" name = "update_qty">Update</button>
+                                <button type = "submit" name = "remove_item">Remove</button>
                                 <div>
                                     Sub-Total : <span>₹ <?= $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?>/-</span>
                                 </div>
@@ -113,14 +125,13 @@ $user_id = $SESSION['user_id'];
                     <div class="total">
                         <?php
 
-                        $select_cart = $conn->prepare("SELECT * FROM `cart` WHERE user_id = ?");
-                        $select_cart->execute([$user_id]);
-                        if ($select_cart->rowCount() > 0) {
-                            while ($fetch_cart = $select_cart->fetch(PDO::FETCH_ASSOC)) {
+                        
+                        if (count($items) > 0) {
+                            foreach ($items as $fetch_cart) {
                         ?>
                                 <div class="ftotal">
                                     <p class="ct"><h3><?= $fetch_cart['name']; ?></h3></p>
-                                    <p class="ct"><h3><?= "₹ " . $fetch_cart['price']; ?></h3></p>
+                                    <p class="ct"><h3><?= "₹ " . ( $fetch_cart['price'] * $fetch_cart['quantity']); ?></h3></p>
                                 </div>
 
                         <?php }
@@ -135,10 +146,11 @@ $user_id = $SESSION['user_id'];
                         </p>
                     </div>
                 </div>
-
+                <?php if (count($items) > 0): ?>
                 <div class="checkout">
                     <a href="checkout.php" role="button" class="checkout_btn">Place Order</a>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
 </body>
