@@ -1,6 +1,20 @@
 <?php
 session_start();
 require_once __DIR__ . '/../config.php';
+
+if(isset($_POST['delete_btn'])){
+  $id = $_POST['delete_id'];
+
+  $stmt = $conn->prepare( "DELETE from order_items where order_id=? ");
+  $stmt->execute([$id]);
+
+  $stmt = $conn->prepare( "DELETE from `order` where id=? ");
+  $stmt->execute([$id]);
+  
+  header('Location: admin_orders.php');
+  exit;
+}
+
 include('includes/header.php');
 include('includes/navbar.php');
 ?>
@@ -33,8 +47,9 @@ include('includes/navbar.php');
       <div class="table-responsive">
 
         <?php
-        $query = "SELECT * FROM `order`";
-        $query_run = mysqli_query($connection, $query);
+        $stmt = $conn->prepare( "SELECT * from `order`");
+        $stmt->execute();
+        $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
 
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -53,8 +68,8 @@ include('includes/navbar.php');
           </thead>
           <tbody>
             <?php
-            if (mysqli_num_rows($query_run) > 0) {
-              while ($row = mysqli_fetch_assoc($query_run)) {
+            if (count($orders) > 0) {
+              foreach ($orders as $row) {
             ?>
 
 
@@ -103,18 +118,12 @@ include('includes/navbar.php');
 
 </div>
 
-<?php 
-if(isset($_POST['delete_btn'])){
-  $id = $_POST['delete_id'];
-  $query = "DELETE from `order` where id='$id' ";
-        $query_run = mysqli_query($connection, $query);
-        if($query_run){
-          $message[] = "Order deleted successfully";
-        }
-}
+ 
 
 
-?>
+
+
+
 
 
 
