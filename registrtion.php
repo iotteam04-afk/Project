@@ -1,24 +1,38 @@
 <?php
+
 session_start();
-header('location:member_login.php');
+
 
 require_once __DIR__ . '/config.php';
-  $name=$_POST['username'];
-  $em=$_POST['email'];
-  $pass=$_POST['password'];
 
-  $q="SELECT * from data where username='name' && email ='em' && password='pass' ";
-
-  $resut=mysqli_query($connection,$q);
-  $num=mysqli_num_rows($resut);
-
-  if($num==1){
-    echo"Data dublicate";
-  }else{
-    $qy="insert into data(username,email, password)values('$name','$em','$pass')";
-    mysqli_query($connection,$qy);
+  if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+    header('Location: Register.php');
+    exit;
   }
 
-  mysqli_query($connection,$q);
+  $username = trim($_POST['username'] ?? '');
+  $email = trim($_POST['email'] ?? '');
+  $password = trim($_POST['password'] ?? '');
+
+  if($username === '' || $email === '' || $password === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $_SESSION['status'] = 'Please fill in all fields with a valid email';
+      header('Location: Register.php');
+      exit;
+  }
+
+  $stmt = $conn->prepare('SELECT id FROM data WHERE email = ?');
+  $stmt->execute([$email]);
+
+  if($stmt->fetch()){
+    $_SESSION['status'] = 'Email already registered';
+    header('Location: Register.php');
+    exit;
+  }
+
+  $stmt = $conn->prepare('INSERT INTO data (username, email, password) VALUES (?,?,?)');
+  $stmt->execute([$username, $email, password_hash($password, PASSWORD_DEFAULT)]);
+
+  header('Location: member_login.php');
+  exit;
 
 ?>
