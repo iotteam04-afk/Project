@@ -24,15 +24,12 @@ include('includes/navbar.php');
                 
                 <?php              
 
-                $query = "SELECT id FROM admins ORDER BY id";
-                $query_run = mysqli_query($connection, $query);
-                $row =mysqli_num_rows($query_run);
+              
+                $row =$conn->query('SELECT COUNT(*) FROM admins')->fetchColumn();
                 echo'<h3>Admins: '.$row.' </h3>';
-
-                
-                $query = "SELECT id FROM data ORDER BY id";
-                $query_run = mysqli_query($connection, $query);
-                $row =mysqli_num_rows($query_run);
+               
+              
+                $row =$conn->query('SELECT COUNT(*) FROM data')->fetchColumn();
                 echo'<h3>Members: '.$row.' </h3>';
 
 

@@ -77,8 +77,7 @@ include('includes/navbar.php');
       <div class="table-responsive">
 
         <?php
-        $query = "SELECT * FROM admins";
-        $query_run = mysqli_query($connection, $query);
+        $admins = $conn->query('SELECT * FROM admins')->fetchAll(PDO::FETCH_ASSOC);
         ?>
 
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -94,8 +93,8 @@ include('includes/navbar.php');
           </thead>
           <tbody>
             <?php
-            if (mysqli_num_rows($query_run) > 0) {
-              while ($row = mysqli_fetch_assoc($query_run)) {
+            if (count($admins) > 0) {
+              foreach ($admins as $row) {
             ?>
 
 
