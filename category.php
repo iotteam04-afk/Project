@@ -35,6 +35,9 @@ include 'wishlist_cart.php';
 <body>
 
 <?php include 'header/header.php'; ?> 
+<?php if (!empty($message)) foreach ($message as $msg) { ?>
+   <div class = "message"><span><?= e($msg) ?></span></div>
+<?php } ?>
 
 <section class="products">
 

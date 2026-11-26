@@ -1,22 +1,8 @@
 <?php
 
 
-     $user_id = $_SESSION['user_id'] ?? '';
-    
-   
-    
-    if(isset($message)){
-       foreach($message as $message){
-          echo '
-          <div class="message">
-             <span>'.$message.'</span>
-             <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
-          </div>
-          ';
-       }
-    }
- 
 
+ 
 if(isset($_POST['add_to_cart'])){
 
    if($user_id === '') {
@@ -34,8 +20,8 @@ if(isset($_POST['add_to_cart'])){
       $qty = $_POST['qty'];
       $qty = filter_var($qty, FILTER_SANITIZE_STRING);
 
-      $check_cart_numbers = $conn->prepare("SELECT * FROM `cart` WHERE name = ? AND user_id = ?");
-      $check_cart_numbers->execute([$name, $user_id]);
+      $check_cart_numbers = $conn->prepare("SELECT * FROM `cart` WHERE pid = ? AND user_id = ?");
+      $check_cart_numbers->execute([$pid, $user_id]);
 
       if($check_cart_numbers->rowCount() > 0){
          $message[] = 'already added to cart!';
