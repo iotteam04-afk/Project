@@ -12,8 +12,7 @@ $conn= new PDO ("mysql:host=$db_host;dbname=$db_name;charset=utf8mb4", $db_user,
 ]
 );
 
-$connection = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
-mysqli_set_charset($connection, "utf8mb4");
+
 
 function e($value)
 {
