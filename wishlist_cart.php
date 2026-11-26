@@ -1,11 +1,8 @@
 <?php
 
-if(isset($_SESSION['email'])){
-     $user_id = $_SESSION['email'];
-    }else{
-       $user_id = '';
-       header('location:member_login.php');
-    };
+
+     $user_id = $_SESSION['user_id'] ?? '';
+    
    
     
     if(isset($message)){
@@ -22,7 +19,10 @@ if(isset($_SESSION['email'])){
 
 if(isset($_POST['add_to_cart'])){
 
-
+   if($user_id === '') {
+      header('Location: member_login.php');
+      exit;
+   }
       $pid = $_POST['pid'];
       $pid = filter_var($pid, FILTER_SANITIZE_STRING);
       $name = $_POST['name'];

@@ -6,12 +6,13 @@ session_start();
 
 
 
-if (isset($_SESSION['email'])) {
-    $user_id = $_SESSION['email'];
-} else {
-    $user_id = '';
-    header('location:member_login.php');
-};
+if (!isset($_SESSION['user_id'])) {
+    header('Location:member_login.php');
+    exit;
+} 
+$user_id = $SESSION['user_id'];
+    
+
 
 ?>
 

@@ -5,13 +5,13 @@ require_once __DIR__ . '/config.php';
 
 
 
-if(isset($_SESSION['user_id'])){
-   $user_id = $_SESSION['user_id'];
- }else{
-
+if(!isset($_SESSION['user_id'])){
    header('Location: member_login.php');
    exit;
- };
+ }
+ $user_id = $_SESSION['user_id'];
+
+
  $message = [];
  $order_done = false;
  
