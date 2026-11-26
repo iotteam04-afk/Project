@@ -18,10 +18,10 @@ include('includes/navbar.php');
       if (isset($_POST['edit_btn'])) {
         $id = $_POST['edit_id'];
 
-        $query = "SELECT * FROM admins WHERE id='$id' ";
-        $query_run = mysqli_query($connection, $query);
-
-        foreach ($query_run as $row) {
+        $stmt = $conn->prepare("SELECT * FROM data WHERE id='$id'");
+        $stmt->execute([id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
       ?>
 
           <form action="admin_regester.php" method="POST">
@@ -42,7 +42,7 @@ include('includes/navbar.php');
             </div>
 
             <a href="register.php" class="btn btn-danger"> CANCEL </a>
-            <button type="submit" name="updatebtn" class="btn btn-primary"> Update </button>
+            <button type="submit" name="update_member_btn" class="btn btn-primary"> Update </button>
 
           </form>
       <?php
