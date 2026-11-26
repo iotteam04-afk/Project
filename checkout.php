@@ -12,9 +12,9 @@ if(!isset($_SESSION['user_id'])){
  $user_id = $_SESSION['user_id'];
 
 
- $message = [];
- $order_done = false;
  
+ $order_done = false;
+ $message = [];
  
 // $pid = $_GET['id'];
 
@@ -29,47 +29,62 @@ if(isset($_POST['order_btn'])){
    
    $stmt = $conn->prepare('SELECT * FROM "cart" WHERE user_id = ?');
    $stmt->execute([$user_id]);
-   $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-   $price_total = 0;
-   $total_product = 0;
-   if(count($cart_items) > 0){
-      foreach($cart_items as $product_item){
-
-      };
-   };
+   $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
    
-   $stmt = $conn->prepare('INSERT INTO "order" (name,number,email,method,address,total_products,total_price,user_id) VALUES (?,?,?,?,?,?,?,?)');   
-   $detail_query = $stmt->execute([$name, $number, $email,$method,$address, $total_product, $price_total, $user_id]);
-   $stmt = $conn->prepare('DELETE FROM "cart" WHERE user_id = ?');
-   $stmt->execute([$user_id]);
-   if($detail_query){
-      echo "
+   if(count($items) === 0){
+      $message[] = 'Your cart is empty';
+   } else {
+      $price_total = 0;
+      $total_product = 0;
+      foreach($items as $it){
+         $price_total  += $it['price'] * $it['quantity'];
+         $total_product += $it['quatity'];
+      }
+      $conn->beginTransaction();
+
+      $stmt = $conn->prepare('INSERT INTO "order" (name,number,email,method,address,total_products,total_price,user_id) VALUES (?,?,?,?,?,?,?,?)');
+      $detail_query = $stmt->execute([$name, $number, $email,$method,$address, $total_product, $price_total, $user_id]);
+      $order_id = $conn->lastInsertid();
+
+      $stmt = $conn->prepare('INSERT INTO order_items (order_id,product_id,name,price,quantity) VALUES (?,?,?,?,?)');
+      foreach($items as $it){
+         $stmt->execute([$order_id,$it['pid'],$it['name'],$it['price'],$it['quantity']]);
+      }
+
+      $stmt = $conn->prepare('DELETE FROM "cart" WHERE user_id = ?');
+      $stmt->execute([$user_id]);
+
+      $conn->commit();
+      $order_done = true;
+      
+
+      }
+}
+?>
+      
+   
+      <?php if ($order_done): ?>
       <div class='order-message-container'>
       <div class='message-container'>
          <h3>thank you for shopping!</h3>
          <div class='order-detail'>
-            <span>".$total_product."</span>
-            <span class='total'> total : $".$price_total."/-  </span>
+            <span><?= e($total_product) ?></span>
+            <span class='total'> total : ₹<?= e($price_total) ?>/-  </span>
          </div>
          <div class='customer-details'>
-            <p> your name : <span>".$name."</span> </p>
-            <p> your number : <span>".$number."</span> </p>
-            <p> your email : <span>".$email."</span> </p>
-            <p> your address : <span>".$address."</span> </p>
-            <p> your payment mode : <span>".$method."</span> </p>
+            <p> your name : <span><?= e($name) ?></span> </p>
+            <p> your number : <span><?= e($number) ?></span> </p>
+            <p> your email : <span><?= e($email) ?></span> </p>
+            <p> your address : <span><?= e($address) ?></span> </p>
+            <p> your payment mode : <span><?= e($method) ?></span> </p>
             <p>(*pay when product arrives*)</p>
          </div>
             <a href='home.php' class='btn'>continue shopping</a>
          </div>
       </div>
-      ";
-   }
-
-}
-
-?>
+      
+      <?php endif; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -93,6 +108,9 @@ if(isset($_POST['order_btn'])){
 <section class="checkout-form">
 
    <h1 class="heading">complete your order</h1>
+   <?php foreach ($message as $msg) { ?>
+      <div class="message"><span><?= e($msg) ?></span></div>
+   <?php } ?>
 
    <form action="" method="post">
 
@@ -115,7 +133,7 @@ if(isset($_POST['order_btn'])){
          echo "<div class='display-order'><span>your cart is empty!</span></div>";
       }
       ?>
-      <span class="grand-total"> grand total : Rs<?= $grand_total; ?> /- </span>
+      <span class="grand-total"> grand total : ₹<?= $grand_total; ?> /- </span>
    </div>
 
       <div class="flex">
