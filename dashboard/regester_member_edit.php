@@ -42,7 +42,7 @@ include('includes/navbar.php');
             </div>
 
             <a href="member_fetch.php" class="btn btn-danger"> CANCEL </a>
-            <button type="submit" name="updatebtn" class="btn btn-primary"> Update </button>
+            <button type="submit" name="update_member_btn" class="btn btn-primary"> Update </button>
 
           </form>
       <?php
