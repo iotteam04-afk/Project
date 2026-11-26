@@ -18,10 +18,10 @@ include('includes/navbar.php');
       if (isset($_POST['edit_btn'])) {
         $id = $_POST['edit_id'];
 
-        $query = "SELECT * FROM data WHERE id='$id' ";
-        $query_run = mysqli_query($connection, $query);
-
-        foreach ($query_run as $row) {
+        $stmt = $conn->prepare("SELECT * FROM data WHERE id='$id'");
+        $stmt->execute([id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
       ?>
 
           <form action="admin_regester.php" method="POST">
