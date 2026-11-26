@@ -1,17 +1,19 @@
 <?php
-
+session_start();
 
 require_once __DIR__ . '/config.php';
 
-session_start();
 
-if(isset($_SESSION['email'])){
-   $user_id = $_SESSION['email'];
+
+if(isset($_SESSION['user_id'])){
+   $user_id = $_SESSION['user_id'];
  }else{
-   $user_id = '';
-   header('location:member_login.php');
+
+   header('Location: member_login.php');
+   exit;
  };
- 
+ $message = [];
+ $order_done = false;
  
  
 // $pid = $_GET['id'];
@@ -25,23 +27,24 @@ if(isset($_POST['order_btn'])){
    $method = $_POST['method'];
    $address = $_POST['address'];
    
-   $cart_query = mysqli_query($connection, "SELECT * FROM `cart` where user_id='$user_id'");
+   $stmt = $conn->prepare('SELECT * FROM "cart" WHERE user_id = ?');
+   $stmt->execute([$user_id]);
+   $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
    $price_total = 0;
    $total_product = 0;
-   if(mysqli_num_rows($cart_query) > 0){
-      while($product_item = mysqli_fetch_assoc($cart_query)){
-         $product_name[] = $product_item['name'];
-         $product_price = $product_item['price']; //add quanttity
-         $price_total += $product_price;
-         $total_product += 1;
+   if(count($cart_items) > 0){
+      foreach($cart_items as $product_item){
+
       };
    };
 
    
-   $detail_query = mysqli_query($connection, "INSERT INTO `order`(name, number, email, method, address, total_products, total_price, user_id) VALUES('$name','$number','$email','$method','$address','$total_product','$price_total', '$user_id')") or die('query failed');
-   
-   $delete_cart= mysqli_query($connection, "DELETE FROM `cart` WHERE user_id='$user_id'");
-   if($cart_query && $detail_query){
+   $stmt = $conn->prepare('INSERT INTO "order" (name,number,email,method,address,total_products,total_price,user_id) VALUES (?,?,?,?,?,?,?,?)');   
+   $detail_query = $stmt->execute([$name, $number, $email,$method,$address, $total_product, $price_total, $user_id]);
+   $stmt = $conn->prepare('DELETE FROM "cart" WHERE user_id = ?');
+   $stmt->execute([$user_id]);
+   if($detail_query){
       echo "
       <div class='order-message-container'>
       <div class='message-container'>
@@ -95,11 +98,13 @@ if(isset($_POST['order_btn'])){
 
    <div class="display-order">
       <?php
-         $select_cart = mysqli_query($connection, "SELECT * FROM `cart` where user_id='$user_id'");
+         $stmt = $conn->prepare( "SELECT * FROM `cart` where user_id=?");
+         $stmt->execute([$user_id]);
+         $cart_rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
          $total = 0;
          $grand_total = 0;
-         if(mysqli_num_rows($select_cart) > 0){
-            while($fetch_cart = mysqli_fetch_assoc($select_cart)){
+         if(count($cart_rows) > 0){
+            foreach($cart_rows as $fetch_cart){
             $total_price = $fetch_cart['price'] * $fetch_cart['quantity'];
             $grand_total +=  $total_price;
       ?>
