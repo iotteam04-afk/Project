@@ -15,17 +15,15 @@ if(!isset($_SESSION['user_id'])){
  
  $order_done = false;
  $message = [];
- 
-// $pid = $_GET['id'];
 
 
 if(isset($_POST['order_btn'])){
 
-   $name = $_POST['name'];
-   $number = $_POST['number'];
-   $email = $_POST['email'];
-   $method = $_POST['method'];
-   $address = $_POST['address'];
+   $name = trim($_POST['name'] ?? '');
+   $number = trim($_POST['number'] ?? '');
+   $email = trim($_POST['email'] ?? '');
+   $method = trim($_POST['method'] ?? '');
+   $address = trim($_POST['address'] ?? '');
    
    $stmt = $conn->prepare('SELECT * FROM `cart` WHERE user_id = ?');
    $stmt->execute([$user_id]);
@@ -62,29 +60,6 @@ if(isset($_POST['order_btn'])){
       }
 }
 ?>
-      
-   
-      <?php if ($order_done): ?>
-      <div class='order-message-container'>
-      <div class='message-container'>
-         <h3>thank you for shopping!</h3>
-         <div class='order-detail'>
-            <span><?= e($total_product) ?></span>
-            <span class='total'> total : ₹<?= e($price_total) ?>/-  </span>
-         </div>
-         <div class='customer-details'>
-            <p> your name : <span><?= e($name) ?></span> </p>
-            <p> your number : <span><?= e($number) ?></span> </p>
-            <p> your email : <span><?= e($email) ?></span> </p>
-            <p> your address : <span><?= e($address) ?></span> </p>
-            <p> your payment mode : <span><?= e($method) ?></span> </p>
-            <p>(*pay when product arrives*)</p>
-         </div>
-            <a href='home.php' class='btn'>continue shopping</a>
-         </div>
-      </div>
-      
-      <?php endif; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -108,6 +83,27 @@ if(isset($_POST['order_btn'])){
 <section class="checkout-form">
 
    <h1 class="heading">complete your order</h1>
+   <?php if ($order_done): ?>
+      <div class='order-message-container'>
+      <div class='message-container'>
+         <h3>thank you for shopping!</h3>
+         <div class='order-detail'>
+            <span><?= e($total_product) ?></span>
+            <span class='total'> total : ₹<?= e($price_total) ?>/-  </span>
+         </div>
+         <div class='customer-details'>
+            <p> your name : <span><?= e($name) ?></span> </p>
+            <p> your number : <span><?= e($number) ?></span> </p>
+            <p> your email : <span><?= e($email) ?></span> </p>
+            <p> your address : <span><?= e($address) ?></span> </p>
+            <p> your payment mode : <span><?= e($method) ?></span> </p>
+            <p>(*pay when product arrives*)</p>
+         </div>
+            <a href='home.php' class='btn'>continue shopping</a>
+         </div>
+      </div>
+      
+      <?php endif; ?>
    <?php foreach ($message as $msg) { ?>
       <div class="message"><span><?= e($msg) ?></span></div>
    <?php } ?>
@@ -126,14 +122,14 @@ if(isset($_POST['order_btn'])){
             $total_price = $fetch_cart['price'] * $fetch_cart['quantity'];
             $grand_total +=  $total_price;
       ?>
-      <span><?= $fetch_cart['name']; ?>(<?= $fetch_cart['quantity']; ?>)</span>
+      <span><?= e($fetch_cart['name']) ?> (<?= e($fetch_cart['quantity']) ?>)</span>
       <?php
          }
       }else{
          echo "<div class='display-order'><span>your cart is empty!</span></div>";
       }
       ?>
-      <span class="grand-total"> grand total : ₹<?= $grand_total; ?> /- </span>
+      <span class="grand-total"> grand total : ₹<?= e($grand_total) ?> /- </span>
    </div>
 
       <div class="flex">

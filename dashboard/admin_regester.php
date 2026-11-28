@@ -40,10 +40,9 @@ if(isset($_POST['registerbtn']))
 
 if(isset($_POST['updatebtn']))
 {
-  $id=$_POST['edit_id'];
-  $username=$_POST['edit_username'];
-  $email=$_POST['edit_email'];
-  
+  $id = (int)($_POST['edit_id'] ?? 0);
+  $username=trim($_POST['edit_username'] ?? '');
+  $email=trim($_POST['edit_email'] ?? '');
 
   $stmt = $conn->prepare("UPDATE admins SET username=?, email=? WHERE id=?");
   $query_run = $stmt->execute([$username, $email, $id]);
@@ -63,7 +62,7 @@ if(isset($_POST['updatebtn']))
 }
   if(isset($_POST['deletebtn']))
   {
-    $id=$_POST['deleteid'];
+    $id = (int)($_POST['deleteid'] ?? 0);
     if ((int)$id === (int)$_SESSION['admin_id']) {
       $_SESSION['status'] = "You cannot delete your own account.";
       header('Location: register.php');
@@ -93,10 +92,9 @@ if(isset($_POST['updatebtn']))
   
 if(isset($_POST['update_member_btn']))
 {
-  $id=$_POST['edit_id'];
-  $username=$_POST['edit_username'];
-  $email=$_POST['edit_email'];
-  
+   $id = (int)($_POST['edit_id'] ?? 0);
+  $username=trim($_POST['edit_username'] ?? '');
+  $email=trim($_POST['edit_email'] ?? '');
 
   $stmt = $conn->prepare("UPDATE data SET username=?, email=? WHERE id=?");
   $query_run = $stmt->execute([$username,$email,$id]);
@@ -119,7 +117,7 @@ if(isset($_POST['update_member_btn']))
 
 if(isset($_POST['delete_btn']))
 {
-  $id=$_POST['delete_id'];
+  $id = (int)($_POST['delete_id'] ?? 0);
   $stmt = $conn->prepare("DELETE  FROM data WHERE id=?");
   $query_run = $stmt->execute([$id]);
 

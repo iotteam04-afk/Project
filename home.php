@@ -109,16 +109,14 @@ if (isset($_SESSION['user_id'])) {
       while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){
       ?>
       <div class="product">
-        <img src="dashboard/instruments_img/<?= $fetch_products['image'] ?>">
+        <img src="dashboard/instruments_img/<?= e($fetch_products['image']) ?>">
         <div class="product-info">
-          <h3 class="product-name"><?= $fetch_products['name'] ?>
+          <h3 class="product-name"><?= e($fetch_products['name']) ?>
           </h3>
           <ul class="product-info" style="list-style-type:disc">
-            <li><?= $fetch_products['details'] ?></li>
-            <li>High durability and stability proven by Yamaha's quality standard</li>
-            <li>38 inches long (96.5cm)</li>
+            <li><?= e($fetch_products['details']) ?></li>
           </ul>
-          <h4 class="product-price">₹ <?= $fetch_products['price']?></h4>          
+          <h4 class="product-price">₹ <?= e($fetch_products['price'])?></h4>          
         </div>
       </div>
 <?php }}?>

@@ -2,7 +2,7 @@
 require_once __DIR__ . '/security.php';
 
 if(isset($_POST['delete_btn'])){
-  $id = $_POST['delete_id'];
+  $id = (int)($_POST['delete_id'] ?? 0);
 
   $stmt = $conn->prepare( "DELETE from order_items where order_id=? ");
   $stmt->execute([$id]);
@@ -33,12 +33,12 @@ include('includes/navbar.php');
 
       <?php
       if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
-        echo '<h3 class="bg-primary text-white">' . $_SESSION['success'] . '<h3>';
+        echo '<h3 class="bg-primary text-white">' . e($_SESSION['success']) . '</h3>';
         unset($_SESSION['success']);
       }
 
       if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-        echo '<h3 class="bg-danger text-white">' . $_SESSION['status'] . '<h3>';
+        echo '<h3 class="bg-danger text-white">' . e($_SESSION['status']) . '</h3>';
         unset($_SESSION['status']);
       }
 
@@ -75,30 +75,30 @@ include('includes/navbar.php');
                 <tr>
                   
                   <td>
-                    <?php echo $row['name']; ?>
+                    <?php echo e($row['name']) ?>
                   </td>
                   <td>
-                    <?php echo $row['number']; ?>
+                    <?php echo e($row['number']) ?>
                   </td>
                   <td>
-                    <?php echo $row['email']; ?>
+                    <?php echo e($row['email']) ?>
                   </td>
                   <td>
-                    <?php echo $row['method']; ?>
+                    <?php echo e($row['method']) ?>
                   </td>
                   <td>
-                    <?php echo $row['address']; ?>
+                    <?php echo e($row['address']) ?>
                   </td>
                   <td>
-                    <?php echo $row['total_price']; ?>
+                    <?php echo e($row['total_price']) ?>
                   </td>
                   <td>
-                    <?php echo $row['user_id']; ?>
+                    <?php echo e($row['user_id']) ?>
                   </td>
                   
                   <td>
                     <form action="" method="post">
-                      <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
+                      <input type="hidden" name="delete_id" value="<?php echo e($row['id']) ?>">
                       <button type="submit" name="delete_btn" class="btn btn-danger"> DELETE</button>
                     </form>
                   </td>
@@ -110,7 +110,7 @@ include('includes/navbar.php');
             ?>
           </tbody>
         </table>
-
+ 
       </div>
     </div>
   </div>

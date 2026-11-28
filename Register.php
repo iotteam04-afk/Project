@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once __DIR__ . '/config.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +21,7 @@
   <div class="loginbox">
     <h1>Member Registration </h1><br><br>
     <?php if (!empty($_SESSION['status'])): ?>
-        <p style="color: #ff8080: font-size: 18px;"><?= e($_SESSION['status']) ?></p>
+        <p style="color: #ff8080; font-size: 18px;"><?= e($_SESSION['status']) ?></p>
         <?php unset($_SESSION['status']); ?>
       <?Php endif; ?>
     <form id="form_id" method="post" name="myform" action="registrtion.php">

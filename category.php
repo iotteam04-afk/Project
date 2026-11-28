@@ -54,18 +54,18 @@ include 'wishlist_cart.php';
    ?>
 
    <form action="" class="box" method="POST">
-   <input type="hidden" name="pid" value="<?= $fetch_products['id']; ?>">
-      <input type="hidden" name="name" value="<?= $fetch_products['name']; ?>">
-      <input type="hidden" name="price" value="<?= $fetch_products['price']; ?>">
-      <input type="hidden" name="image" value="<?= $fetch_products['image']; ?>">
-      <img src="dashboard/instruments_img/<?= $fetch_products['image']; ?>" alt="">
-      <div class="name"><?= $fetch_products['name']; ?></div>
+   <input type="hidden" name="pid" value="<?= e($fetch_products['id']) ?>">
+      <input type="hidden" name="name" value="<?= e($fetch_products['name']) ?>">
+      <input type="hidden" name="price" value="<?= e($fetch_products['price']) ?>">
+      <input type="hidden" name="image" value="<?= e($fetch_products['image']) ?>">
+      <img src="dashboard/instruments_img/<?= e($fetch_products['image']) ?>" alt="">
+      <div class="name"><?= e($fetch_products['name']) ?></div>
       <div class="flex">
-      <div class="price">₹ <span><?= $fetch_products['price']; ?></span>/-</div>
+      <div class="price">₹ <span><?= e($fetch_products['price']) ?></span>/-</div>
       
       <input type="number" min="1" value="1" name="qty" class="qty" max="99" onkeypress="if(this.value.length == 2) return false;">
       </div>
-      <div class="name"><?= $fetch_products['details']; ?></div>
+      <div class="name"><?= e($fetch_products['details']) ?></div>
       
       <input type="submit" value="add to cart" class="btn" name="add_to_cart">
       <input type="button" value="Buy Now" href="checkout.php?id=<?= $fetch_products['id'];?>" class="btn">

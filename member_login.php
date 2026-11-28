@@ -57,7 +57,7 @@ require_once __DIR__ . '/config.php';
 
       <h1>Member Login </h1><br><br>
       <?php if (!empty($_SESSION['status'])): ?>
-        <p style="color: #ff8080: font-size: 18px;"><?= e($_SESSION['status']) ?></p>
+        <p style="color: #ff8080; font-size: 18px;"><?= e($_SESSION['status']) ?></p>
         <?php unset($_SESSION['status']); ?>
       <?Php endif; ?>
 

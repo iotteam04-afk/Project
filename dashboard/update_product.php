@@ -4,17 +4,16 @@ require_once __DIR__ . '/security.php';
 
 if(isset($_POST['update'])){
 
-   $pid = $_POST['pid'];
-   $name = $_POST['name'];
-   $name = filter_var($name, FILTER_SANITIZE_STRING);
-   $price = $_POST['price'];
-   $price = filter_var($price, FILTER_SANITIZE_STRING);
-   $category = $_POST['category'];
-   $category = filter_var($category,FILTER_SANITIZE_STRING);
-   $details = $_POST['details'];
-   $details = filter_var($details, FILTER_SANITIZE_STRING);
-   $image_01 = $_POST['image_01'];
-   $image_01 = filter_var($image_01, FILTER_SANITIZE_STRING);
+   $pid = (int)($_POST['pid'] ?? 0);
+   $name = trim($_POST['name'] ?? '');
+   $price = (int)($_POST['price'] ?? 0);
+   $category = $_POST['category'] ?? '';
+   $details = trim($_POST['details'] ?? '');
+   
+   if (!in_array($category, ['guitar', 'violin', 'percussion'],true)) {
+      $category = 'guitar';
+   }
+
    $update_product = $conn->prepare("UPDATE `products` SET name = ?, price = ?,category = ?, details = ? WHERE id = ?");
    $update_product->execute([$name, $price,$category, $details, $pid]);
 
@@ -41,6 +40,9 @@ if(isset($_POST['update'])){
 </head>
 <body>
 
+<?php if (!empty($message)) foreach ($message as $msg) { ?>
+   <div class="message"><span><?= e($msg) ?></span></div>
+<?php } ?>
 
 
 <section class="update-product">
@@ -48,26 +50,26 @@ if(isset($_POST['update'])){
    <h1 class="heading">update product</h1>
 
    <?php
-      $update_id = $_GET['update'];
+      $update_id = (int)($_GET['update'] ?? 0);
       $select_products = $conn->prepare("SELECT * FROM `products` WHERE id = ?");
       $select_products->execute([$update_id]);
       if($select_products->rowCount() > 0){
          while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){ 
    ?>
    <form action="" method="post" enctype="multipart/form-data">
-      <input type="hidden" name="pid" value="<?= $fetch_products['id']; ?>">
-      <input type="hidden" name="old_image_01" value="<?= $fetch_products['image']; ?>">
-      
+      <input type="hidden" name="pid" value="<?= e($fetch_products['id']) ?>">
+      <input type="hidden" name="old_image_01" value="<?= e($fetch_products['image']) ?>">
+
       <div class="image-container">
          <div class="main-image">
-            <img src="instruments_img/<?= $fetch_products['image']; ?>" alt="">
+            <img src="instruments_img/<?= e($fetch_products['image']) ?>" alt="">
          </div>
          
       </div>
       <span>update name</span>
-      <input type="text" name="name" required class="box" maxlength="100" placeholder="enter product name" value="<?= $fetch_products['name']; ?>">
+      <input type="text" name="name" required class="box" maxlength="100" placeholder="enter product name" value="<?= e($fetch_products['name']) ?>">
       <span>update price</span>
-      <input type="number" name="price" required class="box" min="0" max="9999999999" placeholder="enter product price" onkeypress="if(this.value.length == 10) return false;" value="<?= $fetch_products['price']; ?>">
+      <input type="number" name="price" required class="box" min="0" max="9999999999" placeholder="enter product price" onkeypress="if(this.value.length == 10) return false;" value="<?= e($fetch_products['price']) ?>">
       <span>update category</span>
       <select name="category" id="category" class="box">
                   <option value="guitar">Guitar</option>
@@ -75,7 +77,7 @@ if(isset($_POST['update'])){
                   <option value="percussion">Percussion</option>
                </select>
       <span>update details</span>
-      <textarea name="details" class="box" required cols="30" rows="10"><?= $fetch_products['details']; ?></textarea>
+      <textarea name="details" class="box" required cols="30" rows="10"><?= e($fetch_products['details']) ?></textarea>
       <span>update image 01</span>
       <input type="file" name="image_01" accept="image/jpg, image/jpeg, image/png, image/webp" class="box">
       

@@ -16,7 +16,7 @@ include('includes/navbar.php');
       <?php
 
       if (isset($_POST['edit_btn'])) {
-        $id = $_POST['edit_id'];
+        $id = (int)($_POST['edit_id'] ?? 0);
 
         $stmt = $conn->prepare("SELECT id, username, email FROM admins WHERE id=?");
         $stmt->execute([$id]);
@@ -26,15 +26,15 @@ include('includes/navbar.php');
 
           <form action="admin_regester.php" method="POST">
 
-            <input type="hidden" name="edit_id" value="<?php echo $row['id'] ?>">
+            <input type="hidden" name="edit_id" value="<?php echo e($row['id']) ?>">
 
             <div class="form-group">
               <label> Username </label>
-              <input type="text" name="edit_username" value="<?php echo $row['username'] ?>" class="form-control" placeholder="Enter Username">
+              <input type="text" name="edit_username" value="<?php echo e($row['username']) ?>" class="form-control" placeholder="Enter Username">
             </div>
             <div class="form-group">
               <label>Email</label>
-              <input type="email" name="edit_email" value="<?php echo $row['email'] ?>" class="form-control" placeholder="Enter Email">
+              <input type="email" name="edit_email" value="<?php echo e($row['email']) ?>" class="form-control" placeholder="Enter Email">
             </div>
 
             <a href="register.php" class="btn btn-danger"> CANCEL </a>

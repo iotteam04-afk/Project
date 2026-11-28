@@ -19,12 +19,12 @@ include('includes/navbar.php');
 
       <?php
       if (isset($_SESSION['success']) && $_SESSION['success'] != '') {
-        echo '<h3 class="bg-primary text-white">' . $_SESSION['success'] . '<h3>';
+        echo '<h3 class="bg-primary text-white">' . e($_SESSION['success']) . '</h3>';
         unset($_SESSION['success']);
       }
 
       if (isset($_SESSION['status']) && $_SESSION['status'] != '') {
-        echo '<h3 class="bg-danger text-white">' . $_SESSION['status'] . '<h3>';
+        echo '<h3 class="bg-danger text-white">' . e($_SESSION['status']) . '</h3>';
         unset($_SESSION['status']);
       }
 
@@ -54,23 +54,23 @@ include('includes/navbar.php');
 
                 <tr>
                   <td>
-                    <?php echo $row['id']; ?>
+                    <?php echo e($row['id']) ?>
                   </td>
                   <td>
-                    <?php echo $row['username']; ?>
+                    <?php echo e($row['username']) ?>
                   </td>
                   <td>
-                    <?php echo $row['email']; ?>
+                    <?php echo e($row['email']) ?>
                   </td>
                   <td>
                     <form action="regester_member_edit.php" method="post">
-                      <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
+                      <input type="hidden" name="edit_id" value="<?php echo e($row['id']) ?>">
                       <button type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
                     </form>
                   </td>
                   <td>
                     <form action="admin_regester.php" method="post">
-                      <input type="hidden" name="delete_id" value="<?php echo $row['id']; ?>">
+                      <input type="hidden" name="delete_id" value="<?php echo e($row['id']) ?>">
                       <button type="submit" name="delete_btn" class="btn btn-danger"> DELETE</button>
                     </form>
                   </td>

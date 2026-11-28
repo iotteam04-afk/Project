@@ -4,18 +4,15 @@ require_once __DIR__ . '/security.php';
 
 if (isset($_POST['add_product'])) {
 
-   $name = $_POST['name'];
-   $name = filter_var($name, FILTER_SANITIZE_STRING);
-   $price = $_POST['price'];
-   $price = filter_var($price, FILTER_SANITIZE_STRING);
-   $category = $_POST['category'];
-   $category = filter_var($category,FILTER_SANITIZE_STRING);
-   $details = $_POST['details'];
-   $details = filter_var($details, FILTER_SANITIZE_STRING);
+   $name = trim($_POST['name'] ?? '');
+   $price = (int)($_POST['price'] ?? 0);
+   $category = $_POST['category'] ?? '';
+   $details = trim($_POST['details'] ?? '');
+   $image_01 = basename(trim($_POST['image_01'] ?? ''));
 
-   $image_01 = $_POST['image_01'];
-   $image_01 = filter_var($image_01, FILTER_SANITIZE_STRING);
-
+   if (!in_array($category, ['guitar', 'violin', 'percussion'],true)) {
+      $category = 'guitar';
+   }
    $select_products = $conn->prepare("SELECT * FROM `products` WHERE name = ?");
    $select_products->execute([$name]);
 
@@ -64,6 +61,10 @@ if (isset($_POST['delete_product'])) {
 </head>
 
 <body>
+
+<?php if (!empty($message)) foreach ($message as $msg) { ?>
+   <div class="message"><span><?= e($msg) ?></span></div>
+<?php } ?>
 
    <section class="add-products">
 
@@ -117,14 +118,14 @@ if (isset($_POST['delete_product'])) {
             while ($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)) {
          ?>
                <div class="box">
-                  <img src="instruments_img/<?= $fetch_products['image']; ?>" alt="">
-                  <div class="name"><?= $fetch_products['name']; ?></div>
-                  <div class="price">Category: <?= $fetch_products['category']; ?></div>
-                  <div class="price">Rs. <span><?= $fetch_products['price']; ?></span>/-</div>
-                  <div class="details"><span><?= $fetch_products['details']; ?></span></div>
-                  <a href="update_product.php?update=<?=$fetch_products['id']; ?>" class="btn">Update Products</a>
+                  <img src="instruments_img/<?= e($fetch_products['image']) ?>" alt="">
+                  <div class="name"><?= e($fetch_products['name']) ?></div>
+                  <div class="price">Category: <?= e($fetch_products['category']) ?></div>
+                  <div class="price">Rs. <span><?= e($fetch_products['price']) ?></span>/-</div>
+                  <div class="details"><span><?= e($fetch_products['details']) ?></span></div>
+                  <a href="update_product.php?update=<?= e($fetch_products['id']) ?>" class="btn">Update Products</a>
                   <form action="add_products.php" method="post" style="display: inline;">
-                     <input type="hidden" name="delete_id" value="<?=$fetch_products['id']; ?>">
+                     <input type="hidden" name="delete_id" value="<?= e($fetch_products['id']) ?>">
                      <button type="submit" name="delete_product" class="btn">Delete </button>
                   </form>
                </div>
