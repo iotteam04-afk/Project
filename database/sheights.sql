@@ -120,6 +120,14 @@ CREATE TABLE `order` (
   `user_id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `order_items` (
+  `id` int(255) NOT NULL,
+  `order_id` int(255) NOT NULL,
+  `product_id` int(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `quantity` int(255) NOT NULL,
+  `price` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 --
 -- Dumping data for table `order`
 --
@@ -179,6 +187,8 @@ ALTER TABLE `data`
 ALTER TABLE `order`
   ADD PRIMARY KEY (`id`);
 
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`);
 --
 -- Indexes for table `products`
 --
@@ -212,7 +222,9 @@ ALTER TABLE `data`
 --
 ALTER TABLE `order`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
+  
+ALTER TABLE `order_items`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `products`
 --

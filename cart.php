@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
     header('Location:member_login.php');
     exit;
 } 
-$user_id = $SESSION['user_id'];
+$user_id = $_SESSION['user_id'];
     
 if (isset($_POST['update_qty'])){
     $stmt = $conn->prepare("UPDATE cart SET quantity = ? WHERE id = ? AND user_id = ?");

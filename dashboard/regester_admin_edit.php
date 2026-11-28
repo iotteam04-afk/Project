@@ -18,8 +18,8 @@ include('includes/navbar.php');
       if (isset($_POST['edit_btn'])) {
         $id = $_POST['edit_id'];
 
-        $stmt = $conn->prepare("SELECT * FROM data WHERE id='$id'");
-        $stmt->execute([id]);
+        $stmt = $conn->prepare("SELECT * FROM admins WHERE id=?");
+        $stmt->execute([$id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($row) {
       ?>
@@ -42,7 +42,7 @@ include('includes/navbar.php');
             </div>
 
             <a href="register.php" class="btn btn-danger"> CANCEL </a>
-            <button type="submit" name="update_member_btn" class="btn btn-primary"> Update </button>
+            <button type="submit" name="updatebtn" class="btn btn-primary"> Update </button>
 
           </form>
       <?php

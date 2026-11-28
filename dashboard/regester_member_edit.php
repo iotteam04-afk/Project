@@ -18,8 +18,8 @@ include('includes/navbar.php');
       if (isset($_POST['edit_btn'])) {
         $id = $_POST['edit_id'];
 
-        $stmt = $conn->prepare("SELECT * FROM data WHERE id='$id'");
-        $stmt->execute([id]);
+        $stmt = $conn->prepare("SELECT * FROM data WHERE id=?");
+        $stmt->execute([$id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($row) {
       ?>

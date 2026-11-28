@@ -27,7 +27,7 @@ if(isset($_POST['order_btn'])){
    $method = $_POST['method'];
    $address = $_POST['address'];
    
-   $stmt = $conn->prepare('SELECT * FROM "cart" WHERE user_id = ?');
+   $stmt = $conn->prepare('SELECT * FROM `cart` WHERE user_id = ?');
    $stmt->execute([$user_id]);
    $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -39,11 +39,11 @@ if(isset($_POST['order_btn'])){
       $total_product = 0;
       foreach($items as $it){
          $price_total  += $it['price'] * $it['quantity'];
-         $total_product += $it['quatity'];
+         $total_product += $it['quantity'];
       }
       $conn->beginTransaction();
 
-      $stmt = $conn->prepare('INSERT INTO "order" (name,number,email,method,address,total_products,total_price,user_id) VALUES (?,?,?,?,?,?,?,?)');
+      $stmt = $conn->prepare('INSERT INTO `order` (name,number,email,method,address,total_products,total_price,user_id) VALUES (?,?,?,?,?,?,?,?)');
       $detail_query = $stmt->execute([$name, $number, $email,$method,$address, $total_product, $price_total, $user_id]);
       $order_id = $conn->lastInsertid();
 
@@ -52,7 +52,7 @@ if(isset($_POST['order_btn'])){
          $stmt->execute([$order_id,$it['pid'],$it['name'],$it['price'],$it['quantity']]);
       }
 
-      $stmt = $conn->prepare('DELETE FROM "cart" WHERE user_id = ?');
+      $stmt = $conn->prepare('DELETE FROM `cart` WHERE user_id = ?');
       $stmt->execute([$user_id]);
 
       $conn->commit();

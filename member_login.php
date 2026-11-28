@@ -25,8 +25,8 @@ require_once __DIR__ . '/config.php';
 
     if ($row && password_verify($password, $row['password'])) {
       session_regenerate_id(true);
-      $SESSION['user_id'] = $row[ 'id'];
-      $SESSION['username'] = $row[ 'username'];
+      $_SESSION['user_id'] = $row[ 'id'];
+      $_SESSION['username'] = $row[ 'username'];
       header('Location: home.php');
       exit;
     } 
