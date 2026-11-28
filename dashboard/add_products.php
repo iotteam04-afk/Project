@@ -1,14 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../config.php';
-
-// session_start();
-
-// $admin_id = $_SESSION['admin_id'];
-
-// if(!isset($admin_id)){
-//    header('location:admin_login.php');
-// };
+require_once __DIR__ . '/security.php';
 
 if (isset($_POST['add_product'])) {
 
@@ -23,9 +15,6 @@ if (isset($_POST['add_product'])) {
 
    $image_01 = $_POST['image_01'];
    $image_01 = filter_var($image_01, FILTER_SANITIZE_STRING);
-   //$image_size_01 = $_FILES['image_01']['size'];
-   //$image_tmp_name_01 = $_FILES['image_01']['tmp_name'];
-   // $image_folder_01 = 'instruments_img/' . $image_01;
 
    $select_products = $conn->prepare("SELECT * FROM `products` WHERE name = ?");
    $select_products->execute([$name]);
@@ -38,34 +27,22 @@ if (isset($_POST['add_product'])) {
       $insert_products->execute([$name, $details, $price, $category, $image_01]);
 
       $message[] = 'new product added!';
-      // if($insert_products){
-      //    if($image_size_01 > 2000000 ){
-      //       $message[] = 'image size is too large!';
-      //    }else{
-      //       move_uploaded_file($image_tmp_name_01, $image_folder_01);
-
-      //       $message[] = 'new product added!';
-      //    }
-
-      // }
 
    }
 };
 
-if (isset($_GET['delete'])) {
+if (isset($_POST['delete_product'])) {
 
-   $delete_id = $_GET['delete'];
-   // $delete_product_image = $conn->prepare("SELECT * FROM `products` WHERE id = ?");
-   // $delete_product_image->execute([$delete_id]);
-   // $fetch_delete_image = $delete_product_image->fetch(PDO::FETCH_ASSOC);
-   // unlink('instruments_img/' . $fetch_delete_image['image_01']);
+   $deleted_id = (int)($_POST['delete_id'] ?? 0);
 
-   $delete_product = $conn->prepare("DELETE FROM `products` WHERE id = ?");
-   $delete_product->execute([$delete_id]);
-   // $delete_cart = $conn->prepare("DELETE FROM `cart` WHERE pid = ?");
-   // $delete_cart->execute([$delete_id]);
+   $stmt = $conn->prepare("DELETE FROM `cart` WHERE pid = ?");
+   $stmt->execute([$deleted_id]);
 
-   header('location:add_products.php');
+   $stmt = $conn->prepare("DELETE FROM `products` WHERE id = ?");
+   $stmt->execute([$deleted_id]);
+
+   header('Location: add_products.php');
+   exit;
 }
 
 
@@ -146,7 +123,10 @@ if (isset($_GET['delete'])) {
                   <div class="price">Rs. <span><?= $fetch_products['price']; ?></span>/-</div>
                   <div class="details"><span><?= $fetch_products['details']; ?></span></div>
                   <a href="update_product.php?update=<?=$fetch_products['id']; ?>" class="btn">Update Products</a>
-                  <a href="add_products.php?delete=<?=$fetch_products['id']; ?>" class="btn">Delete</a>
+                  <form action="add_products.php" method="post" style="display: inline;">
+                     <input type="hidden" name="delete_id" value="<?=$fetch_products['id']; ?>">
+                     <button type="submit" name="delete_product" class="btn">Delete </button>
+                  </form>
                </div>
          <?php
             }

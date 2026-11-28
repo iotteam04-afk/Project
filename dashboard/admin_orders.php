@@ -1,6 +1,5 @@
 <?php
-session_start();
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/security.php';
 
 if(isset($_POST['delete_btn'])){
   $id = $_POST['delete_id'];

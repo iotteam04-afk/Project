@@ -1,6 +1,5 @@
 <?php
-session_start();
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/security.php';
 include('includes/header.php');
 include('includes/navbar.php');
 ?>
@@ -33,7 +32,7 @@ include('includes/navbar.php');
       <div class="table-responsive">
 
         <?php
-        $members = $conn->query('SELECT * FROM data')->fetchAll(PDO::FETCH_ASSOC);
+        $members = $conn->query('SELECT id, username, email FROM data')->fetchAll(PDO::FETCH_ASSOC);
         ?>
 
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -42,7 +41,6 @@ include('includes/navbar.php');
               <th> ID </th>
               <th> Username </th>
               <th>Email </th>
-              <th>Password</th>
               <th>EDIT </th>
               <th>DELETE </th>
             </tr>
@@ -63,9 +61,6 @@ include('includes/navbar.php');
                   </td>
                   <td>
                     <?php echo $row['email']; ?>
-                  </td>
-                  <td>
-                    <?php echo $row['password']; ?>
                   </td>
                   <td>
                     <form action="regester_member_edit.php" method="post">

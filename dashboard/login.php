@@ -1,7 +1,39 @@
 <?php
-// session_start();
-include('security.php');
-include('includes/header.php');
+session_start();
+require_once __DIR__ . '/../config.php';
+
+if(isset($_POST['logout_btn'])){
+  $_SESSION = [];
+  session_destroy();
+  header('Location: login.php');
+  exit;
+  }
+
+  if (isset($_SESSION['admin_id'])) {
+    header('Location: index.php');
+    exit;
+  }
+
+  if (isset($_POST['login_btn'])) {
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    $stmt = $conn->prepare('SELECT id, username, password FROM admins WHERE email = ?');
+    $stmt->execute([$email]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($row && password_verify($password, $row['password'])) {
+      session_regenerate_id(true);
+      $_SESSION['admin_id'] = $row['id'];
+      $_SESSION['admin_name'] = $row['username'];
+      header('Location: index.php');
+      exit;
+    } 
+    $_SESSION['status'] = 'Wrong email or password';
+    header('Location: login.php');
+    exit;
+  }
+  include('includes/header.php');
 ?>
 
 
@@ -31,13 +63,13 @@ include('includes/header.php');
                   ?>
                 </div>
 
-                <form class="user" action="admin_regester.php" method="POST">
+                <form class="user" action="login.php" method="POST">
 
                   <div class="form-group">
-                    <input type="email" name="emaill" class="form-control form-control-user" placeholder="Enter Email ">
+                    <input type="email" name="email" class="form-control form-control-user" placeholder="Enter Email ">
                   </div>
                   <div class="form-group">
-                    <input type="password" name="passwordd" class="form-control form-control-user" placeholder="Password">
+                    <input type="password" name="password" class="form-control form-control-user" placeholder="Password">
                   </div>
 
                   <button type="submit" name="login_btn" class="btn btn-primary btn-user btn-block"> Login </button>

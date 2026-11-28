@@ -1,6 +1,6 @@
 <?php
-session_start();
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/security.php';
+
 include('includes/header.php');
 include('includes/navbar.php');
 ?>
@@ -18,7 +18,7 @@ include('includes/navbar.php');
       if (isset($_POST['edit_btn'])) {
         $id = $_POST['edit_id'];
 
-        $stmt = $conn->prepare("SELECT * FROM data WHERE id=?");
+        $stmt = $conn->prepare("SELECT id, username, email FROM data WHERE id=?");
         $stmt->execute([$id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($row) {
@@ -35,10 +35,6 @@ include('includes/navbar.php');
             <div class="form-group">
               <label>Email</label>
               <input type="email" name="edit_email" value="<?php echo $row['email'] ?>" class="form-control" placeholder="Enter Email">
-            </div>
-            <div class="form-group">
-              <label>Password</label>
-              <input type="password" name="edit_password" value="<?php echo $row['password'] ?>" class="form-control" placeholder="Enter Password">
             </div>
 
             <a href="member_fetch.php" class="btn btn-danger"> CANCEL </a>

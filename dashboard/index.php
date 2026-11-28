@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/security.php';
 include('includes/header.php');
 include('includes/navbar.php');
 ?>

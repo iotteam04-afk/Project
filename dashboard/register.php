@@ -1,6 +1,5 @@
 <?php
-session_start();
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/security.php';
 include('includes/header.php');
 include('includes/navbar.php');
 ?>
@@ -21,19 +20,19 @@ include('includes/navbar.php');
 
           <div class="form-group">
             <label> Username </label>
-            <input type="text" name="username" class="form-control" placeholder="Enter Username">
+            <input type="text" name="username" class="form-control" placeholder="Enter Username" required>
           </div>
           <div class="form-group">
             <label>Email</label>
-            <input type="email" name="email" class="form-control" placeholder="Enter Email">
+            <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
           </div>
           <div class="form-group">
             <label>Password</label>
-            <input type="password" name="password" class="form-control" placeholder="Enter Password">
+            <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
           </div>
           <div class="form-group">
             <label>Confirm Password</label>
-            <input type="password" name="confirmpassword" class="form-control" placeholder="Confirm Password">
+            <input type="password" name="confirmpassword" class="form-control" placeholder="Confirm Password" required>
           </div>
 
         </div>
@@ -77,7 +76,7 @@ include('includes/navbar.php');
       <div class="table-responsive">
 
         <?php
-        $admins = $conn->query('SELECT * FROM admins')->fetchAll(PDO::FETCH_ASSOC);
+        $admins = $conn->query('SELECT id, username, email FROM admins')->fetchAll(PDO::FETCH_ASSOC);
         ?>
 
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -86,7 +85,6 @@ include('includes/navbar.php');
               <th> ID </th>
               <th> Username </th>
               <th>Email </th>
-              <th>Password</th>
               <th>EDIT </th>
               <th>DELETE </th>
             </tr>
@@ -109,17 +107,14 @@ include('includes/navbar.php');
                     <?php echo $row['email']; ?>
                   </td>
                   <td>
-                    <?php echo $row['password']; ?>
-                  </td>
-                  <td>
                     <form action="regester_admin_edit.php" method="post">
                       <input type="hidden" name="edit_id" value="<?php echo $row['id']; ?>">
                       <button type="submit" name="edit_btn" class="btn btn-success"> EDIT</button>
                     </form>
                   </td>
                   <td>
-                    <form action="" method="post">
-                      <input type="hidden" name="deleteid" value="">
+                    <form action="admin_regester.php" method="post">
+                      <input type="hidden" name="deleteid" value="<?php echo $row['id']; ?>">
                       <button type="submit" name="deletebtn" class="btn btn-danger"> DELETE</button>
                     </form>
                   </td>
